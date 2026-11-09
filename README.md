@@ -66,5 +66,4 @@ requirements.txt       Python dependencies
 ## Limitations and safety
 This is an educational simulation only. It is **not** connected to real equipment and must not be used to control industrial machinery. Real systems require a safety review, hardwired safety circuits, validated PLC code, and industrial network/security practices.
 
-## Resume wording (accurate)
 **Industrial Automation and Monitoring System (Python PLC/SCADA Simulation)** — Built a simulated PLC control loop for a water tank and pump, with automatic/manual operation, level monitoring, alarm handling, and a browser-based HMI/SCADA dashboard using Flask REST endpoints. Tested control thresholds, interlocks, and sensor-fault behavior with automated unit tests.
