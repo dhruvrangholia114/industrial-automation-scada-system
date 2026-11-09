@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tank Process | SCADA HMI</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header><div><span class="eyebrow"> SIMULATION</span><h1>Tank Process Control</h1><p>PLC · SCADA · HMI Operator Panel</p></div><div id="plcBadge" class="badge">CONNECTING</div></header>
+<main>
+  <section class="metrics">
+    <article><span>Tank Level</span><strong id="level">--%</strong><div class="meter"><div id="levelBar"></div></div></article>
+    <article><span>Pump Motor</span><strong id="pump">--</strong><small>Output: Q0.0 (simulated)</small></article>
+    <article><span>Operating Mode</span><strong id="mode">--</strong><small>Operator selected</small></article>
+    <article><span>Active Alarms</span><strong id="alarmCount">0</strong><small>Alarm summary</small></article>
+  </section>
+  <section class="grid">
+    <article class="panel process">
+      <h2>Process Overview</h2>
+      <div class="diagram">
+        <div class="sensor"><b>LT-101</b><span>Level transmitter</span><strong id="sensorValue">--%</strong></div>
+        <div class="pipe"></div><div class="tank"><div id="water" class="water"></div><span>TK-101</span></div>
+        <div class="pipe"></div><div class="pumpIcon"><span>◉</span><b>P-101</b><small>Pump</small></div>
+      </div>
+      <p class="hint">Conceptual process diagram — not an electrical wiring diagram.</p>
+    </article>
+    <article class="panel">
+      <h2>Operator Controls</h2>
+      <label for="modeSelect">Control mode</label><select id="modeSelect"><option value="AUTO">AUTO</option><option value="MANUAL">MANUAL</option></select>
+      <div class="buttons"><button id="pumpOn" class="primary">Pump ON</button><button id="pumpOff">Pump OFF</button></div>
+      <hr><h3>Simulate process</h3>
+      <div class="buttons"><button id="drain">Drain tank −20%</button><button id="fill">Fill tank +20%</button></div>
+      <label class="check"><input id="fault" type="checkbox"> Simulate level sensor fault</label>
+      <p class="hint">Manual buttons are enabled only in MANUAL mode. Fault interlock always stops the pump.</p>
+    </article>
+  </section>
+  <section class="panel">
+    <div class="sectionHead"><h2>Alarm Summary</h2><button id="ack">Acknowledge alarms</button></div>
+    <div id="alarms" class="alarmList"><p class="muted">No active alarms.</p></div>
+  </section>
+  <section class="panel"><h2>PLC Logic Notes</h2><ul><li>AUTO starts pump at or below 30% and stops at or above 80% (hysteresis).</li><li>Sensor fault or high-high level (95%) inhibits the pump.</li><li>Low-level alarm is below 20%; high-level alarm is at/above 90%.</li><li>PLC scan concept: read process inputs → evaluate logic → update output.</li></ul></section>
+</main>
+<footer>Educational simulated system · No physical PLC or equipment connected</footer>
+<script src="/static/app.js"></script>
+</body></html>
